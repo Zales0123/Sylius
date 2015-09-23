@@ -66,8 +66,7 @@ Feature: User account addresses page
     @javascript
     Scenario: Deleting an address
       Given I press "Delete" near "GERMANY"
-       Then I should see "Do you want to delete this item"
-       When I press "delete"
+       When I click "delete" from the confirmation modal
        Then I should see 2 addresses in the list
         And I should not see "GERMANY"
         And I should still be on my account addresses page
@@ -113,7 +112,7 @@ Feature: User account addresses page
 
     Scenario: Showing only enabled countries
        When I am on my account address creation page
-       Then I should not see "Ukraine" in the countries list
+       Then I should not see country "Ukraine" as available choice
 
     Scenario: Trying to create a new address with country that is no longer available
       Given I am on my account address creation page

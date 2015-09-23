@@ -48,9 +48,8 @@ class ProductContext extends DefaultContext
                 $productAttribute = $this->findOneByName('product_attribute', trim($attribute[0]));
                 $attributeValue =  $this->getRepository('product_attribute_value')->createNew();
 
-                $attributeValue
-                    ->setAttribute($productAttribute)
-                    ->setValue($attribute[1]);
+                $attributeValue->setAttribute($productAttribute);
+                $attributeValue->setValue($attribute[1]);
 
                 $product->addAttribute($attributeValue);
             }
@@ -87,6 +86,10 @@ class ProductContext extends DefaultContext
 
             if (isset($data['deleted']) && 'yes' === $data['deleted']) {
                 $product->setDeletedAt(new \DateTime());
+            }
+
+            if (isset($data['average rating'])) {
+                $product->setAverageRating($data['average rating']);
             }
 
             $manager->persist($product);
@@ -291,5 +294,17 @@ class ProductContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @Given /^product "([^"]*)" has been deleted$/
+     */
+    public function productHasBeenDeleted($productName)
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_index'));
+
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $productName));
+        $locator = sprintf('button:contains("%s")', 'delete');
+        $tr->find('css', $locator)->press();
     }
 }

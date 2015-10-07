@@ -53,7 +53,7 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($value)
+    public function reverseTransform($value)
     {
         if (!$value) {
             return null;
@@ -74,7 +74,7 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function transform($value)
     {
         if (null === $value) {
             return '';

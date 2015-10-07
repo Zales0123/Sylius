@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -75,6 +76,8 @@ class ShippingMethodChoiceType extends AbstractType
     {
         if ($options['multiple']) {
             $builder->addModelTransformer(new CollectionToArrayTransformer());
+        } else {
+            $builder->addModelTransformer(new ObjectToIdentifierTransformer($this->repository));
         }
     }
 

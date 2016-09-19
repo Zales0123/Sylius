@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\CartActions;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -86,9 +87,7 @@ class OrderItemController extends ResourceController
             $cart = $this->getCurrentCart();
             $this->getOrderModifier()->addToOrder($cart, $newResource);
 
-            $cartManager = $this->getCartManager();
-            $cartManager->persist($cart);
-            $cartManager->flush();
+            $this->getCartRepository()->add($cart);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
@@ -142,9 +141,7 @@ class OrderItemController extends ResourceController
 
         $this->repository->remove($resource);
 
-        $cartManager = $this->getCartManager();
-        $cartManager->persist($cart);
-        $cartManager->flush();
+        $this->getCartRepository()->add($cart);
 
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
@@ -228,10 +225,10 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @return EntityManagerInterface
+     * @return OrderRepositoryInterface
      */
-    private function getCartManager()
+    private function getCartRepository()
     {
-        return $this->get('sylius.manager.order');
+        return $this->get('sylius.repository.order');
     }
 }

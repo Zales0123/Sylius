@@ -80,7 +80,7 @@ matrix:
                 apt:
                     packages:
                         - parallel
-        -   
+        -
             php: 7.2
             env:
                 - SYLIUS_SUITE="packages"
@@ -108,6 +108,7 @@ install:
     - etc/travis/run-suite install "${SYLIUS_SUITE}"
 
 before_script:
+    - mysql --version
     - etc/travis/run-suite before_script "${SYLIUS_SUITE}"
 
 script:

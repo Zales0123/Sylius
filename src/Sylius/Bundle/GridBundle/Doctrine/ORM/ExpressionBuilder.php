@@ -59,7 +59,45 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
+        if (strpos($field, '.') !== false) {
+            $fields = explode('.', $field);
+
+            $key = 0;
+            foreach ($fields as $field) {
+                if ($key === count($fields)-1) {
+                    break;
+                }
+
+                $x = $this->getJoinKey($key);
+                $key++;
+                $y = $this->getJoinKey($key);
+
+                $this->queryBuilder->innerJoin($x.'.'.$field, $y);
+            }
+
+            return $this->queryBuilder->expr()->eq($y.'.'.$fields[$key], ':' . $parameterName);
+        }
+
         return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':' . $parameterName);
+    }
+
+    private function getJoinKey(int $i): string
+    {
+        $joinKey = 'o'.($i === 0 ? '' : (string) $i);
+
+        $joinParameters = $this->queryBuilder->getDQLParts()['join'];
+
+        if (empty($joinParameters)) {
+            return $joinKey;
+        }
+
+        foreach ($this->queryBuilder->getDQLParts()['join']['o'] as $key) {
+            if ($key->getAlias() === $joinKey) {
+                return $this->getJoinKey($i+1);
+            }
+        }
+
+        return $joinKey;
     }
 
     /**

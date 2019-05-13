@@ -34,3 +34,10 @@ sylius_grid:
                         template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
                             labels: "@SyliusAdmin/Order/Label/ShippingState"
+            filters:
+                channel:
+                    type: entity
+                    options:
+                        fields: [order.channel.id]
+                    form_options:
+                        class: "%sylius.model.channel.class%"

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -241,7 +241,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function tryToOpen(array $urlParameters = []): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof ChromeDriver) {
             $start = microtime(true);
             $end = $start + 15;
             do {

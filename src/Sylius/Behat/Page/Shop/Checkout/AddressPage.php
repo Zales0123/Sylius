@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
@@ -52,7 +52,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function chooseDifferentBillingAddress(): void
     {
         $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
+        if ($driver instanceof ChromeDriver) {
             $this->getElement('different_billing_address_label')->click();
 
             return;

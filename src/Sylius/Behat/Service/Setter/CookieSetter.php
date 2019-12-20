@@ -79,6 +79,10 @@ final class CookieSetter implements CookieSetterInterface
             return true;
         }
 
+        if (!$session->isStarted()) {
+            $session->start();
+        }
+
         if (false !== strpos($session->getCurrentUrl(), $this->minkParameters['base_url'])) {
             return false;
         }

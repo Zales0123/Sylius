@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
+use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
@@ -22,6 +22,7 @@ use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
+
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
@@ -38,7 +39,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof ChromeDriver) {
             SlugGenerationHelper::waitForSlugGeneration(
                 $this->getSession(),
                 $this->getElement('slug', ['%locale%' => $localeCode])
@@ -136,7 +137,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         $this->clickTab('associations');
 
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
+        Assert::isInstanceOf($this->getDriver(), ChromeDriver::class);
 
         $dropdown = $this->getElement('association_dropdown', [
             '%association%' => $productAssociationType->getName(),
@@ -182,7 +183,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function activateLanguageTab(string $locale): void
     {
-        if (!$this->getDriver() instanceof Selenium2Driver) {
+        if (!$this->getDriver() instanceof ChromeDriver) {
             return;
         }
 
@@ -255,9 +256,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     private function selectElementFromAttributesDropdown(string $id): void
     {
-        /** @var Selenium2Driver $driver */
+        /** @var ChromeDriver $driver */
         $driver = $this->getDriver();
-        Assert::isInstanceOf($driver, Selenium2Driver::class);
+        Assert::isInstanceOf($driver, ChromeDriver::class);
 
         $driver->executeScript('$(\'#sylius_product_attribute_choice\').dropdown(\'show\');');
         $driver->executeScript(sprintf('$(\'#sylius_product_attribute_choice\').dropdown(\'set selected\', \'%s\');', $id));

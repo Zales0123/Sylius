@@ -81,11 +81,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             return false;
         }
 
-        $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
-        $this->getDriver()->back();
-
-        return false === stripos($pageText, '404 Not Found');
+        return get_headers($imageUrl)[0] !== 'HTTP/1.0 404 Not Found';
     }
 
     public function attachImage(string $path, string $type = null): void

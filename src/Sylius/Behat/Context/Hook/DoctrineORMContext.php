@@ -14,27 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\ORM\EntityManagerInterface;
+use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 
 final class DoctrineORMContext implements Context
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     /**
      * @BeforeScenario
      */
-    public function purgeDatabase()
+    public function beforeScenario()
     {
-        $this->entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
-        $purger = new ORMPurger($this->entityManager);
-        $purger->purge();
-        $this->entityManager->clear();
+        StaticDriver::beginTransaction();
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function afterScenario()
+    {
+        StaticDriver::rollBack();
     }
 }

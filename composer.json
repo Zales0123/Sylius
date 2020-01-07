@@ -24,6 +24,7 @@
         "ext-fileinfo": "*",
         "ext-gd": "*",
         "behat/transliterator": "^1.1",
+        "dama/doctrine-test-bundle": "dev-default-static-connection-keeping",
         "doctrine/collections": "^1.3",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.3",
@@ -266,5 +267,8 @@
         "branch-alias": {
             "dev-master": "1.7-dev"
         }
-    }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/Zales0123/doctrine-test-bundle.git" }
+    ]
 }

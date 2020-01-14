@@ -53,6 +53,18 @@ default:
 
         FriendsOfBehat\VariadicExtension: ~
 
+        FriendsOfBehat\ExcludeSpecificationsExtension:
+            features:
+                - features/payment/managing_payment_methods/sorting_payment_methods.feature
+                - features/product/viewing_products/searching_products_by_name_within_specific_taxon.feature
+                - features/product/viewing_products/viewing_product_price_on_products_list.feature
+                - features/product/viewing_products/viewing_products_from_specific_taxon.feature
+                - features/product/viewing_products/viewing_products_from_specific_taxon_and_channel.feature
+                - features/product/viewing_products/viewing_products_from_taxon_and_children.feature
+                - features/product/viewing_products/viewing_products_sorted_by_first_variant_price.feature
+                - features/product/viewing_products/viewing_products_with_multiple_variants_sorted_by_price.feature
+                - features/product/viewing_products/viewing_sorted_products.feature
+
     gherkin:
         filters:
             tags: "~@todo && ~@cli" # CLI is excluded as it registers an error handler that mutes fatal errors

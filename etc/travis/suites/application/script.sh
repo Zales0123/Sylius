@@ -15,8 +15,8 @@ commands=(
 #    test-phpspec
 #    test-phpunit
 #    test-installer
-#    test-behat-without-javascript
-    test-behat-with-javascript
+    test-behat-without-javascript
+#    test-behat-with-javascript
 #    test-behat-with-cli
 #    test-fixtures
 #    test-doctrine-migrations

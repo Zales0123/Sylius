@@ -137,6 +137,9 @@
     "felixfbecker/language-server-protocol": {
         "version": "v1.4.0"
     },
+    "friends-of-behat/exclude-specifications-extension": {
+        "version": "v0.2.0"
+    },
     "friends-of-behat/page-object-extension": {
         "version": "0.1"
     },

@@ -29,7 +29,7 @@ sylius_fixtures:
                     options:
                         custom:
                             us_web_store:
-                                name: 'US Web Store'
+                                name: 'Fashion Web Store'
                                 code: 'FASHION_WEB'
                                 locales:
                                     - '%locale%'

@@ -64,7 +64,7 @@ Feature: Viewing details of a simple product
         And I should see product's depth is 20
         And I should see product's weight is 25
 
-    @ui @javascript
+    @ui
     Scenario: Viewing media block
         Given the "Iron shield" product has an image "mugs.jpg" with "main" type
         When I access "Iron Shield" product page

@@ -54,7 +54,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function selectCreateAccount(): void
     {
-        $this->getDocument()->find('css', 'label[for=sylius_customer_createUser]')->click();
+        $this->getDocument()->checkField('Customer can login to the store?');
     }
 
     public function hasPasswordField(): bool

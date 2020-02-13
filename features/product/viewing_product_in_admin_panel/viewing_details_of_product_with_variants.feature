@@ -44,7 +44,7 @@ Feature: Viewing details of a product with variants
         And I should see "Iron shield" variant with code "123456789-xl", priced "$25.00" and current stock 5
         And I should see "Iron shield" variant with code "123456789-xs", priced "$15.00" and current stock 12
 
-    @ui @javascript
+    @ui
     Scenario: Viewing media block
         Given the "Iron shield" product has an image "mugs.jpg" with "main" type
         When I access "Iron Shield" product page

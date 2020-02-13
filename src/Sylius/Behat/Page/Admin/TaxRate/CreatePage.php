@@ -44,7 +44,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function chooseIncludedInPrice(): void
     {
-        $this->getDocument()->find('css', 'label[for=sylius_tax_rate_includedInPrice]')->click();
+        $this->getDocument()->checkField('Included in price?');
     }
 
     protected function getDefinedElements(): array

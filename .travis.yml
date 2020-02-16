@@ -11,13 +11,14 @@ env:
         - SYLIUS_BUILD_DIR=etc/build
 
 addons:
+    chrome: stable
     apt:
         sources:
             - mysql-5.7-trusty
 
 matrix:
     include:
-        -   
+        -
             php: 7.3
             env:
                 - SYLIUS_SUITE="application"
@@ -25,7 +26,7 @@ matrix:
             services:
                 - memcached
                 - mysql
-        -   
+        -
             php: 7.3
             env:
                 - SYLIUS_SUITE="docs packages"

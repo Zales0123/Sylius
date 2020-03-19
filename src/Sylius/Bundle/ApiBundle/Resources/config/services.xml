@@ -28,5 +28,24 @@
         <service id="sylius.api.shipment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>
+
+        <service
+            id="sylius.api.provider.api_transitions"
+            class="Sylius\Bundle\ApiBundle\Provider\ApiTransitionsProvider"
+        >
+            <argument type="service" id="sm.factory" />
+            <argument>%sm.configs%</argument>
+        </service>
+
+        <service
+            id="sylius.api.normalizer.state_machine_links"
+            class="Sylius\Bundle\ApiBundle\Normalizer\StateMachineTransitionsNormalizer"
+            decorates="api_platform.jsonld.normalizer.item"
+        >
+            <argument type="service" id="sylius.api.normalizer.state_machine_links.inner" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+            <argument type="service" id="sylius.api.provider.api_transitions" />
+            <argument type="service" id="api_platform.router" />
+        </service>
     </services>
 </container>

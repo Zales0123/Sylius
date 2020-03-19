@@ -98,6 +98,15 @@ final class Request implements RequestInterface
         );
     }
 
+    public static function transitionByUrl(string $transitionUrl, string $token): RequestInterface
+    {
+        return new self(
+            '/new-api'.$transitionUrl,
+            HttpRequest::METHOD_PATCH,
+            ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer ' . $token]
+        );
+    }
+
     public static function custom(string $url, string $method, string $token): RequestInterface
     {
         return new self($url, $method, ['HTTP_Authorization' => 'Bearer ' . $token]);

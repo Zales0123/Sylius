@@ -86,6 +86,13 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request(Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token')));
     }
 
+    public function applyTransitionByUrl(string $transitionUrl): Response
+    {
+        $request = Request::transitionByUrl($transitionUrl, $this->sharedStorage->get('token'));
+
+        return $this->request($request);
+    }
+
     public function buildCreateRequest(): void
     {
         $this->request = Request::create($this->resource, $this->sharedStorage->get('token'));

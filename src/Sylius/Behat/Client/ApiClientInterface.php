@@ -35,6 +35,8 @@ interface ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response;
 
+    public function applyTransitionByUrl(string $transitionUrl): Response;
+
     public function buildCreateRequest(): void;
 
     public function buildUpdateRequest(string $id): void;

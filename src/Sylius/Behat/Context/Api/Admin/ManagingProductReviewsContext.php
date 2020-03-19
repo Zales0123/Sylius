@@ -96,9 +96,16 @@ final class ManagingProductReviewsContext implements Context
     /**
      * @When /^I (accept|reject) the ("([^"]+)" product review)$/
      */
-    public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
+    public function iChangeStateTheProductReview(string $transition, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition((string) $productReview->getId(), $state);
+        $response = $this->client->show((string) $productReview->getId());
+        $transitions = $this->responseChecker->getValue($response, 'transitions');
+
+        $transitionUrl = array_filter($transitions, function ($availableTransition) use ($transition): bool {
+            return $availableTransition['name'] === $transition;
+        })[0];
+
+        $this->client->applyTransitionByUrl($transitionUrl['href']);
     }
 
     /**

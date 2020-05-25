@@ -17,7 +17,7 @@ addons:
 
 matrix:
     include:
-        -   
+        -
             php: 7.3
             env:
                 - SYLIUS_SUITE="application"
@@ -25,17 +25,17 @@ matrix:
             services:
                 - memcached
                 - mysql
-        -   
-            php: 7.3
-            env:
-                - SYLIUS_SUITE="docs packages"
-                - SYMFONY_VERSION="4.4.*"
-            services:
-                - docker
-            addons:
-                apt:
-                    packages:
-                        - parallel
+#        -
+#            php: 7.3
+#            env:
+#                - SYLIUS_SUITE="docs packages"
+#                - SYMFONY_VERSION="4.4.*"
+#            services:
+#                - docker
+#            addons:
+#                apt:
+#                    packages:
+#                        - parallel
 
 cache:
     yarn: true
@@ -55,7 +55,9 @@ before_script:
     - etc/travis/run-suite before_script "${SYLIUS_SUITE}"
 
 script:
-    - etc/travis/run-suite script "${SYLIUS_SUITE}"
+#    - etc/travis/run-suite script "${SYLIUS_SUITE}"
+    - gem install travis
+    - travis encrypt "sylius:5QI8kVi8f8kAB04st9ngD40H" --add notifications.slack.rooms
 
 before_cache:
     - etc/travis/run-suite before_cache "${SYLIUS_SUITE}"
@@ -71,3 +73,9 @@ after_script:
 
 notifications:
     email: false
+    slack:
+        on_success: always
+        on_error: always
+        template:
+            - "Cron build on `%{branch}` branch of *%{repository_slug}* has failed :sadbono:"
+            - "Check out <%{build_url}|this URL> and fix it!"

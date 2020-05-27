@@ -4,22 +4,22 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/common.lib.s
 
 code=0
 commands=(
-    validate-composer
-    validate-composer-security
-    validate-doctrine-schema
-    validate-twig
-    validate-yaml-files
-    validate-yarn-packages
-    test-doctrine-migrations
-    test-phpstan
-    test-psalm
-    test-phpspec
-    test-phpunit
-    test-installer
-    test-fixtures
+#    validate-composer
+#    validate-composer-security
+#    validate-doctrine-schema
+#    validate-twig
+#    validate-yaml-files
+#    validate-yarn-packages
+#    test-doctrine-migrations
+#    test-phpstan
+#    test-psalm
+#    test-phpspec
+#    test-phpunit
+#    test-installer
+#    test-fixtures
     test-behat-without-javascript
     test-behat-with-javascript
-    test-behat-with-cli
+#    test-behat-with-cli
 )
 
 for command in ${commands[@]}; do

@@ -12,33 +12,33 @@ env:
 
 jobs:
     include:
-        -   
-            php: 7.3
-            env:
-                - SYLIUS_SUITE="application"
-                - SYMFONY_VERSION="4.4.*"
-            services:
-                - mysql
-            addons:
-                apt:
-                    sources:
-                        - google-chrome
-                    packages:
-                        - google-chrome-stable
-                chrome: stable
-        -   
-            php: 7.3
-            env:
-                - SYLIUS_SUITE="docs packages"
-                - SYMFONY_VERSION="4.4.*"
-            services:
-                - docker
-                - mysql
-            addons:
-                apt:
-                    packages:
-                        - parallel
-        -   
+#        -
+#            php: 7.3
+#            env:
+#                - SYLIUS_SUITE="application"
+#                - SYMFONY_VERSION="4.4.*"
+#            services:
+#                - mysql
+#            addons:
+#                apt:
+#                    sources:
+#                        - google-chrome
+#                    packages:
+#                        - google-chrome-stable
+#                chrome: stable
+#        -
+#            php: 7.3
+#            env:
+#                - SYLIUS_SUITE="docs packages"
+#                - SYMFONY_VERSION="4.4.*"
+#            services:
+#                - docker
+#                - mysql
+#            addons:
+#                apt:
+#                    packages:
+#                        - parallel
+        -
             php: 7.4
             env:
                 - SYLIUS_SUITE="application"
@@ -52,17 +52,17 @@ jobs:
                     packages:
                         - google-chrome-stable
                 chrome: stable
-        -   
-            php: 7.4
-            env:
-                - SYLIUS_SUITE="packages"
-                - SYMFONY_VERSION="4.4.*"
-            services:
-                - mysql
-            addons:
-                apt:
-                    packages:
-                        - parallel
+#        -
+#            php: 7.4
+#            env:
+#                - SYLIUS_SUITE="packages"
+#                - SYMFONY_VERSION="4.4.*"
+#            services:
+#                - mysql
+#            addons:
+#                apt:
+#                    packages:
+#                        - parallel
             
 cache:
     yarn: true

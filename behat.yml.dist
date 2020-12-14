@@ -32,6 +32,7 @@ default:
                 chrome_headless:
                     chrome:
                         api_url: http://127.0.0.1:9222
+                        socket_timeout: 30
                         validate_certificate: false
                 chrome:
                     selenium2:

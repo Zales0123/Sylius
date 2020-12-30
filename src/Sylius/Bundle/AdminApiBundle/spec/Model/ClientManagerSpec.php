@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\AdminApiBundle\Model;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use FOS\OAuthServerBundle\Entity\ClientManager as FOSClientManager;
 use FOS\OAuthServerBundle\Model\ClientInterface;
@@ -22,7 +22,7 @@ use PhpSpec\ObjectBehavior;
 
 final class ClientManagerSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String'): void
+    function let(EntityManagerInterface $em, EntityRepository $repository, $clientClass = 'Client/Class/String'): void
     {
         $em->getRepository($clientClass)->shouldBeCalled()->willReturn($repository);
         $this->beConstructedWith($em, $clientClass);
